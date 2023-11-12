@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-function mapTodos(array $todos, array $position, Closure $callback): array
+function mapTodos(array $todos, array $positions, Closure $callback): array
 {
-	foreach ($position as $position)
+	foreach ($positions as $position)
 	{
 		$index = (int)$position - 1;
 
