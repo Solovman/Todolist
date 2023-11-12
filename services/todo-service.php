@@ -2,6 +2,18 @@
 
 declare(strict_types=1);
 
+
+function createTodo(string $title) : array
+{
+	return [
+		'id' => uniqid(),
+		'title' => $title,
+		'completed' => false,
+		'created_at' => time(),
+		'update_at' => null,
+		'completed_at' => null,
+	];
+}
 function mapTodos(array $todos, array $positions, Closure $callback): array
 {
 	foreach ($positions as $position)

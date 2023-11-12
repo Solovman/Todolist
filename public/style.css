@@ -79,3 +79,12 @@ header .icon {
 	font-size: 48px;
 	margin-left: 6px;
 }
+
+.alert {
+	padding: 12px;
+	border-radius: 5px ;
+}
+
+.alert.danger {
+	background-color: rgb(234, 111, 105);
+}
