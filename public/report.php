@@ -42,9 +42,9 @@ $report  = [
 	"Average completed tasks per day: $averageCompletedTasksCount"
 ];
 
-
 echo view('layout',[
 	'title' => 'Todolist :: Report',
+	'bottomMenu' => require_once ROOT . '/menu.php',
 	'content' => view('pages/report', [
 		'report' => $report,
 	]),

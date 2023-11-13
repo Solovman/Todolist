@@ -1,7 +1,8 @@
 <?php
 /**
- * @var string $title;
- * @var string $content;
+ * @var string $title
+ * @var string $content
+ * @var $bottomMenu
  */
 ?>
 
@@ -17,13 +18,16 @@
 <body>
 <section class="content">
 	<header>
-		<span class="icon">📝</span>
+		<a href="/todolist/public/index.php" class="icon">📝</a>
 		<h1><?= $title ?><h1>
 	</header>
 	<?= $content ?>
 
 	<footer>
-		&copy;  <?= date('Y') ?> Todolist
+		<div>
+			&copy;  <?= date('Y') ?> Todolist
+		</div>
+		<?= view('components/menu', ['items' => $bottomMenu])?>
 	</footer>
 </section>
 

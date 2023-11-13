@@ -46,6 +46,7 @@ if (isset($_GET['date']))
 
 echo view('layout',[
 	'title' => $title,
+	'bottomMenu' => require_once ROOT . '/menu.php',
 	'content' => view('pages/index', [
 		'todos' => getTodos($time),
 		'isHistory' => $isHistory,

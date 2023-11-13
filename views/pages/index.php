@@ -15,9 +15,15 @@ $url = '/todolist/public/index.php';
 			<?= implode('<br>', $errors) ?>
 		</div>
 	<?php endif; ?>
+
+	<?php if (empty($todos)): ?>
+		<p>Noting todo here</p>
+	<?php endif; ?>
+
 	<?php foreach ($todos as $todo):?>
 		<?= view('components/todo', ['todo' =>$todo, 'isHistory' => $isHistory])?>
 	<?php endforeach; ?>
+
 
 	<?php if (!$isHistory): ?>
 		<form action=<?= $url ?> method="post" class="add-todo">
