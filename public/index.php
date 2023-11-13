@@ -7,7 +7,7 @@ require_once __DIR__ . '/../boot.php';
 
 $time = null;
 $isHistory = false;
-$title = 'Todolist';
+$title = option('APP_NAME', 'Todolist');
 $errors = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST')

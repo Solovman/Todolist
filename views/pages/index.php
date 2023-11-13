@@ -21,7 +21,10 @@ $url = '/todolist/public/index.php';
 	<?php endif; ?>
 
 	<?php foreach ($todos as $todo):?>
-		<?= view('components/todo', ['todo' =>$todo, 'isHistory' => $isHistory])?>
+		<?= view('components/todo', [
+			'todo' =>$todo,
+			'isHistory' => $isHistory,
+		])?>
 	<?php endforeach; ?>
 
 

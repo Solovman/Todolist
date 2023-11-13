@@ -7,7 +7,7 @@
 ?>
 
 <!doctype html>
-<html lang="en">
+<html lang=<?= option('APP_LANG', 'en') ?>>
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -25,7 +25,7 @@
 
 	<footer>
 		<div>
-			&copy;  <?= date('Y') ?> Todolist
+			&copy;  <?= date('Y') .' '. $title?>
 		</div>
 		<?= view('components/menu', ['items' => $bottomMenu])?>
 	</footer>

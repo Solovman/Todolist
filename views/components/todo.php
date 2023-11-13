@@ -3,6 +3,7 @@
  * @var array $todo
  * @var bool $isHistory
  */
+
 ?>
 <article class="todo">
 	<label>
@@ -11,6 +12,6 @@
 			<?= ($todo['completed']) ? 'checked': ''?>
 			<?= ($isHistory) ? 'disabled': ''?>
 		>
-		<?= safe($todo['title']) ?>
+		<?= safe(truncate($todo['title'], option('TRUNCATE_TODO', 200))) ?>
 	</label>
 </article>
