@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
 
 		addTodo($todo);
 
-		redirect('/todolist/public/index.php/?saved=true');
+		redirect('/index.php/?saved=true');
 	}
 	else
 	{

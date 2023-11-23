@@ -14,8 +14,8 @@ $dayBefore = $time - $secondsInDay;
 $dayAfter = $time + $secondsInDay;
 
 return [
-	['url' => '/todolist/public/index.php?date=' . date('Y-m-d', $dayBefore), 'text' => '-1 day'],
-	['url' => '/todolist/public/index.php?date='. date('Y-m-d', $dayAfter), 'text' => '+1 day'],
-	['url' => '/todolist/public/index.php', 'text' => 'Today'],
-	['url' => '/todolist/public/report.php', 'text' => 'Reporting'],
+	['url' => '/index.php?date=' . date('Y-m-d', $dayBefore), 'text' => '-1 day'],
+	['url' => '/index.php?date='. date('Y-m-d', $dayAfter), 'text' => '+1 day'],
+	['url' => '/index.php', 'text' => 'Today'],
+	['url' => '/report.php', 'text' => 'Reporting'],
 ];

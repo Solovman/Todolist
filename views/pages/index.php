@@ -5,7 +5,7 @@
  * @var array $errors
  */
 
-$url = '/todolist/public/index.php';
+$url = '/index.php';
 ?>
 
 
