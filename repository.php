@@ -8,23 +8,39 @@ declare(strict_types=1);
 */
 function getTodos(?int $time = null): array
 {
-	$filePath = getRepositoryPath($time);
+	$connection = getDbConnection();
 
-	# Если файл не существует
-	if (!file_exists($filePath))
+	$from = date('Y-m-d 00:00:00', $time);
+	$to = date('Y-m-d 23:59:59', $time);
+
+	$result = mysqli_query($connection, "
+	SELECT * FROM todos
+	WHERE created_at BETWEEN '{$from}' AND '{$to}'
+	ORDER BY created_at
+	LIMIT 100
+	");
+
+	if (!$result)
 	{
-		return [];
+		throw new Exception(mysqli_error($connection));
 	}
 
-	# Содержимое файла
-	$content = file_get_contents($filePath);
-	# Параметр options обеспечивает безопасноть
-	$todos = unserialize($content, [
-		'allowed_classes' => false,
-	]);
+	$todos = [];
 
-	# Возращаем только в том случае, если массив, иначе возвращаем пустой массив
-	return is_array($todos) ? $todos : [];
+	while ($row = mysqli_fetch_assoc($result))
+	{
+		// echo '<pre>',var_dump($row); '</pre>';
+		$todos[] = [
+			'id' => $row['id'],
+			'title' => $row['title'],
+			'completed' => ($row['completed'] === 'Y'),
+			'created_at' => strtotime($row['created_at']),
+			'updated_at' => $row['updated_at'] ? strtotime($row['updated_at']) : null,
+			'completed_at' => $row['completed_at'] ? strtotime($row['completed_at']) : null,
+		];
+	}
+	// die;
+	return $todos;
 }
 
 function getTodosOrFail(?int $time = null): array
@@ -41,27 +57,21 @@ function getTodosOrFail(?int $time = null): array
 	return $todos;
 }
 
-function addTodo( array $todo, ?int $time = null)
+function addTodo(array $todo): bool
 {
-	$todos = getTodos($time); # Выбрать список
-	$todos[] = $todo;
+	$connection = getDbConnection();
 
-	storeTodos($todos);
+	$id = mysqli_real_escape_string($connection, $todo['id']);
+	$title = mysqli_real_escape_string($connection, $todo['title']);
 
+	$sql = "INSERT INTO todos (id, title) VALUES ('{$id}', '{$title}')";
+
+	$result = mysqli_query($connection, $sql);
+	if (!$result)
+	{
+		throw new Exception(mysqli_error($connection));
+	}
+
+	return true;
 }
 
-function storeTodos(array $todos, ?int $time = null)
-{
-	$filePath = getRepositoryPath($time);
-	file_put_contents($filePath, serialize($todos));
-}
-
-function getRepositoryPath(?int $time): string
-{
-	# Если никакое время не передано, то по умолчнию берем текущее
-	$time = $time ?? time();
-
-	$fileName = date('Y-m-d', $time) . '.txt';
-
-	return ROOT . '/data/' . $fileName; # Путь к файлу
-}
