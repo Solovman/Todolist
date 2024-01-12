@@ -9,5 +9,5 @@ function addCommand(array $arguments)
 
 	$todo = createTodo($title);
 
-	addTodo($todo);
+	saveTodo($todo);
 }
